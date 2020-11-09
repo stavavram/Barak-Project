@@ -4,15 +4,16 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
+(require('./configResolver').Resolve)()
 var config = require("config").server;
 
+var container = require('./containerConfig')
+let mon  = container.get('archive')
+mon.connect()
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = config.port;
-var container = require("./containerConfig");
-var multerMiddleware = require('./services/multerMiddleware');
-var storage = container.get("storage");
 
 // swaggerRouter configuration
 var options = {
@@ -27,8 +28,6 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
-
-    app.use(multerMiddleware(storage.getStorage()));
 
     // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
     app.use(middleware.swaggerMetadata());
@@ -47,5 +46,4 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
         console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
         console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
     });
-
 });

@@ -11,12 +11,9 @@
   "dependencies": {
     "config": "^3.0.1",
     "connect": "^3.6.6",
-    "elasticsearch": "^15.4.1",
-    "image-to-text": "^1.0.8",
-    "ioredis": "^4.9.0",
     "js-yaml": "^3.13.0",
     "kontainer-di": "^0.9.9",
-    "multer": "^1.4.1",
+    "mongodb": "^3.6.3",
     "swagger-tools": "^0.10.4",
     "type-is": "^1.6.16"
   },
