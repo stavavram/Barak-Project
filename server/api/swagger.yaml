@@ -1,0 +1,27 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Swagger Test"
+host: "localhost:8080"
+schemes:
+  - "http"
+paths:
+  /uploadFile:
+    post:
+      tags:
+        - "Test"
+      operationId: "uploadFile"
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+          description: The file to upload.
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: TestController
