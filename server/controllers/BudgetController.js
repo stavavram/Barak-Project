@@ -10,5 +10,5 @@ module.exports.uploadFile = async function (req, res, next) {
     await budgetManager.storeBudgetData(collection, jsonForm)
     res.setHeader("Content-Type", "application/json")
     res.statusCode = 201
-    res.end(JSON.stringify({'error': `we currently don't support '${upfile.encoding}' encoding`}))
+    res.end()
 }
