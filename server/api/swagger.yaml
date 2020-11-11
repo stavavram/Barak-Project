@@ -3,15 +3,16 @@ info:
   description: ""
   version: "1.0.0"
   title: "Swagger Test"
-host: "localhost:8080"
+host: "localhost:8200"
 schemes:
   - "http"
 paths:
   /uploadFile:
     post:
       tags:
-        - "Test"
+        - "Budget"
       operationId: "uploadFile"
+      description: "upload budget file"
       consumes:
         - multipart/form-data
       parameters:
@@ -19,9 +20,13 @@ paths:
           name: upfile
           type: file
           description: The file to upload.
+        - in: query
+          name: collection
+          type: string
+          description: The collection name of the data
       responses:
         201:
           description: "successful operation"
           schema:
             type: string
-      x-swagger-router-controller: TestController
+      x-swagger-router-controller: BudgetController

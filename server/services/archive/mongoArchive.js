@@ -5,7 +5,7 @@ module.exports.MongoArchive = class MongoArchive {
         this.config = config;
     }
 
-    async connect(host){
+    async connect(){
         try {
             var connection = await MongoClient.connect(`mongodb://${this.config.host}`, { useNewUrlParser: true });
             this.dbo = connection.db(this.config.dbName);

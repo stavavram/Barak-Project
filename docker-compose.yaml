@@ -4,4 +4,8 @@ services:
   budget-web:
     build: client/.
     ports:
-      - "8000:80"
+      - "8100:80"
+  budget-server:
+    build: server/.
+    ports:
+    - "8200:80"

@@ -5,5 +5,5 @@ COPY package*.json ./
 RUN npm install
 COPY . /usr/share/server
 
-EXPOSE 8080
+EXPOSE 8200
 CMD [ "node", "index.js" ]

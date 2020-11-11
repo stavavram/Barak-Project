@@ -29,6 +29,17 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
+    app.use(function (req, res, next) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Origin,Authorization, X-Requested-With, Content-Type, Accept");
+        if (req.method === "OPTIONS") {
+            res.end();
+        } else {
+            next();
+        }
+    });
+
     // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
     app.use(middleware.swaggerMetadata());
 
