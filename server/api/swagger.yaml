@@ -3,14 +3,14 @@ info:
   description: ""
   version: "1.0.0"
   title: "Swagger Test"
-host: "localhost:8200"
+host: "localhost:1000"
 schemes:
   - "http"
 paths:
   /uploadFile:
     post:
       tags:
-        - "Budget"
+        - "Upload"
       operationId: "uploadFile"
       description: "upload budget file"
       consumes:
@@ -29,4 +29,69 @@ paths:
           description: "successful operation"
           schema:
             type: string
-      x-swagger-router-controller: BudgetController
+      x-swagger-router-controller: UploadController
+  /projects:
+    get:
+      tags:
+        - "Projects"
+      operationId: "getProjects"
+      description: "get all projects from collection"
+      parameters:
+        - in: query
+          name: collection
+          type: string
+          description: the collection
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: ProjectsController
+    delete:
+      tags:
+        - "Projects"
+      operationId: "deleteProjects"
+      description: "delete projects by ids"
+      parameters:
+        - in: query
+          name: collection
+          type: string
+          description: the collection
+        - in: query
+          name: projectIds
+          type: string
+          description: the project ids
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: ProjectsController
+  /collections:
+    get:
+      tags:
+        - "Collections"
+      operationId: "getCollections"
+      description: "get all collections in the db"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: CollectionsController
+    delete:
+      tags:
+        - "Collections"
+      operationId: "deleteCollection"
+      description: "delete collection"
+      parameters:
+        - in: query
+          name: collection
+          type: string
+          description: the collection
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: CollectionsController

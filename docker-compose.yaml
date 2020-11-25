@@ -3,9 +3,26 @@ version: '2'
 services:
   budget-web:
     build: client/.
+    depends_on:
+      - budget-server
+    environment:
+      BUDGET_HOST: 'http://localhost:1000'
     ports:
       - "8100:80"
   budget-server:
     build: server/.
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_HOST: mongodb
     ports:
-    - "8200:80"
+      - "1000:1000"
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ''
+      MONGO_INITDB_ROOT_PASSWORD: ''
+    ports:
+      - 27017:27017
+networks:
+  default:

@@ -1,9 +1,50 @@
 {
   "server": {
-    "port": "8200"
+    "port": "1000"
   },
   "archive":{
     "host": "${MONGO_HOST}",
     "dbName": "test-db"
+  },
+  "dataFieldsTransformers": {
+    "projectName": [
+      "שם הפרויקט"
+    ],
+    "projectDescription": [
+      "תיאור הפרויקט"
+    ],
+    "totalBudgetNis": [
+      "תקציב כולל שח"
+    ],
+    "totalBudgetDollar": [
+      "תקציב כולל דס"
+    ],
+    "operationDeadline": [
+      "תאריך יעד למבצוע"
+    ],
+    "nisBudgetAtRisk": [
+      "תקציב שקלי בסיכון"
+    ],
+    "dollarBudgetAtRisk": [
+      "תקציב דולרי בסיכון"
+    ],
+    "personnel": [
+      "כ״א"
+    ],
+    "commitment": [
+      "התקשרויות"
+    ],
+    "updatedOerationDeadline": [
+      "תאריך יעד עדכני למבצוע"
+    ],
+    "other": [
+      "אחר"
+    ],
+    "isDigital": [
+      "האם דיגיטלי"
+    ],
+    "operationaleader": [
+      "מוביל מבצעי"
+    ]
   }
 }

@@ -1,8 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 
 module.exports.MongoArchive = class MongoArchive {
     constructor(config){
         this.config = config;
+        this.connect()
     }
 
     async connect(){
@@ -18,11 +20,28 @@ module.exports.MongoArchive = class MongoArchive {
     }
 
     async insertDocument(collection, document){
-        return this.dbo.insertDocument(collection, document)
+        return this.dbo.collection(collection).insertOne(document)
     }
 
-    async findByQuery(collection, query){
-        return this.dbo.findByQuery(collection, query)
+    async insertDocuments(collection, documents){
+        return this.dbo.collection(collection).insertMany(documents)
+    }
+
+    async getAllDocuments(collection){
+        return this.dbo.collection(collection).find({}).toArray()
+    }
+
+    async getAllCollections(){
+        return this.dbo.listCollections().toArray()
+    }
+
+    async deleteCollection(collection){
+        return this.dbo.collection(collection).drop()
+    }
+
+    async removeDocumentsByIds(collection, docIds){
+        var myquery = { _id: { $in: docIds.map(x=> ObjectID(x)) } };
+        return this.dbo.collection(collection).deleteMany(myquery)
     }
 
     async close() {

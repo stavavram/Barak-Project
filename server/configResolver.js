@@ -22,5 +22,6 @@ module.exports.Resolve = function () {
 
     var defaultConfigContent = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/default.json'), 'utf8'))
     var newConfigContent = replaceEnv(defaultConfigContent)
-    fs.writeFileSync( 'config/production.json', JSON.stringify(newConfigContent) )
+    console.log('stavvv' + path.join(__dirname, 'config/production.json'))
+    fs.writeFileSync( path.join(__dirname, 'config/production.json'), JSON.stringify(newConfigContent) )
 }

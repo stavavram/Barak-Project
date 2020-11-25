@@ -3,7 +3,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-COPY . /usr/share/server
+COPY . /usr/src/app
 
-EXPOSE 8200
+EXPOSE 1000
 CMD [ "node", "index.js" ]

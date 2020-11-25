@@ -1,4 +1,6 @@
-window.onload = function () {
+
+
+var reloadGraph = function (projects) {
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         zoomEnabled: true,
@@ -19,8 +21,38 @@ window.onload = function () {
         },
         data: [{
             type: "bubble",
-            toolTipContent: "<b>{name}</b><br/>Employment: {x}% <br/> Agri-Land: {y}mn sq. km<br/> Population: {z}mn",
-            dataPoints: [
+            toolTipContent: "<b>{name}</b><br/>Project: {x} <br/> Description: {label} <br/> Budget(nis): {nis}<br/> Budget(dollar): {dollar}",
+            dataPoints: projects.map(project => {
+                return {
+                    x: Math.floor(Math.random() * 70) + 1,
+                    y: Math.floor(Math.random() * 70) + 1,
+                    z: parseInt(project.totalBudgetNis) + parseInt(project.totalBudgetDollar),
+                    nis: parseInt(project.totalBudgetNis),
+                    dollar: parseInt(project.totalBudgetDollar),
+                    name: project.projectName,
+                    color: parseInt(project.isDigital) === 1 ? 'blue': 'green',
+                    label: project.projectDescription
+                }
+            })
+        }]
+    });
+    chart.render();
+}
+
+var getProjects = function () {
+    let collection = document.getElementById('collectionId').value
+    $.get(`${getConfig().budgetHost}/projects?collection=${collection}`, function(data, status){
+        if(status === 'success') {
+            reloadGraph(data)
+        }
+        else{
+            alert(`error occured, status code: ${status}`)
+        }
+    });
+}
+
+/*
+[
                 { x: 39.6, y: 5.225, z:5000, name:"China", color: 'red'},
                 { x: 3.3, y: 4.17, z:21.49, name:"Australia" },
                 { x: 1.5, y: 4.043, z:304.09, name:"US" },
@@ -41,7 +73,4 @@ window.onload = function () {
                 { x: 3.7, y: .144, z:59.83, name:"Italy" },
                 { x: 1.8, y: .169, z:82.11, name:"Germany" }
             ]
-        }]
-    });
-    chart.render();
-}
+ */

@@ -15,6 +15,7 @@
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-style.css">
+    <link rel="stylesheet" href="assets/css/datepicker.min.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
   </head>
@@ -47,8 +48,32 @@
               </div>
             </div>
 
+
+            <section class="forms">
+              <div>
+                <div class="input-group date" data-provide="datepicker">
+                  <span>Start Date</span>
+                  <input type="text" >
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </div>
+                </div>
+                <div class="input-group date" data-provide="datepicker">
+                  <span>End Date </span>
+                  <input type="text" >
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </div>
+                </div>
+                <span>Collection</span>
+                <input id="collectionId" type="text" >
+                <button onclick="getProjects()">Display Projects</button>
+              </div>
+            </section>
+
             <!-- Forms -->
             <section class="forms">
+
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-12">
@@ -59,10 +84,6 @@
                 </div>
               </div>
             </section>
-
-
-
-
           </div>
         </div>
 
@@ -106,11 +127,9 @@
     <script src="assets/js/transition.js"></script>
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="config/config.js"></script>
     <script src="scripts/bubbleChart.js"></script>
     <script src="scripts/canvasjs.min.js"></script>
+    <script src="scripts/datepicker.min.js"></script>
 </body>
-
-
-  </body>
-
 </html>
