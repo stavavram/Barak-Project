@@ -27,6 +27,12 @@ module.exports.MongoArchive = class MongoArchive {
         return this.dbo.collection(collection).insertMany(documents)
     }
 
+    async updateDocument(collection, docId, document){
+        let queryForUpdate = { _id: docId };
+        let newDoc = { $set: document}
+        return this.dbo.collection(collection).updateOne(queryForUpdate, newDoc)
+    }
+
     async getAllDocuments(collection){
         return this.dbo.collection(collection).find({}).toArray()
     }

@@ -46,5 +46,34 @@
     "operationaleader": [
       "מוביל מבצעי"
     ]
+  },
+  "allowedResources": [
+    "projects"
+  ],
+  "roles": {
+    "admin": {
+      "projects": [
+        "read",
+        "write",
+        "delete"
+      ],
+      "users": [
+        "read",
+        "write",
+        "delete"
+      ]
+    },
+    "default": {
+      "projects": [
+        "read"
+      ]
+    },
+    "user": {
+      "projects": [
+        "read",
+        "write",
+        "delete"
+      ]
+    }
   }
 }

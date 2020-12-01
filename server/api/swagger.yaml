@@ -6,7 +6,82 @@ info:
 host: "localhost:1000"
 schemes:
   - "http"
+securityDefinitions:
+  BasicAuth:
+    type: basic
 paths:
+  /auth:
+    post:
+      tags:
+        - "Auth"
+      security:
+        - BasicAuth: []
+      operationId: "authenticate"
+      description: "get token using username and password"
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: AuthController
+  /users:
+    post:
+      tags:
+        - "Auth"
+      operationId: "createUser"
+      description: "create new user"
+      parameters:
+        - in: body
+          name: userObj
+          schema:
+            $ref: '#/definitions/UserData'
+          description: user data
+        - in: header
+          name: authorization
+          type: string
+          description: authorization
+      responses:
+        201:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: AuthController
+    get:
+      tags:
+        - "Auth"
+      operationId: "getAllUsers"
+      description: "get all users"
+      parameters:
+        - in: header
+          name: authorization
+          type: string
+          description: authorization
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: AuthController
+    delete:
+      tags:
+        - "Auth"
+      operationId: "deleteUsers"
+      description: "delete users by user ids"
+      parameters:
+        - in: query
+          name: userIds
+          type: string
+          description: the users ids
+        - in: header
+          name: authorization
+          type: string
+          description: authorization
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: string
+      x-swagger-router-controller: AuthController
   /uploadFile:
     post:
       tags:
@@ -20,10 +95,10 @@ paths:
           name: upfile
           type: file
           description: The file to upload.
-        - in: query
-          name: collection
+        - in: header
+          name: authorization
           type: string
-          description: The collection name of the data
+          description: authorization
       responses:
         201:
           description: "successful operation"
@@ -36,11 +111,6 @@ paths:
         - "Projects"
       operationId: "getProjects"
       description: "get all projects from collection"
-      parameters:
-        - in: query
-          name: collection
-          type: string
-          description: the collection
       responses:
         200:
           description: "successful operation"
@@ -54,44 +124,34 @@ paths:
       description: "delete projects by ids"
       parameters:
         - in: query
-          name: collection
-          type: string
-          description: the collection
-        - in: query
           name: projectIds
           type: string
           description: the project ids
+        - in: header
+          name: authorization
+          type: string
+          description: authorization
       responses:
         201:
           description: "successful operation"
           schema:
             type: string
       x-swagger-router-controller: ProjectsController
-  /collections:
-    get:
-      tags:
-        - "Collections"
-      operationId: "getCollections"
-      description: "get all collections in the db"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: string
-      x-swagger-router-controller: CollectionsController
-    delete:
-      tags:
-        - "Collections"
-      operationId: "deleteCollection"
-      description: "delete collection"
-      parameters:
-        - in: query
-          name: collection
-          type: string
-          description: the collection
-      responses:
-        201:
-          description: "successful operation"
-          schema:
-            type: string
-      x-swagger-router-controller: CollectionsController
+
+definitions:
+  UserData:
+    type: object
+    required:
+      - username
+      - password
+      - role
+    properties:
+      username:
+        type: string
+        default: "test"
+      password:
+        type: string
+        default: "123"
+      role:
+        type: string
+        default: "user"

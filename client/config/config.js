@@ -1,5 +1,5 @@
 var getConfig = function () {
   return {
-    budgetHost: "http://localhost:8200"
+    budgetHost: "http://localhost:1000"
   }
 }

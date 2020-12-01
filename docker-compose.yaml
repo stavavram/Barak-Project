@@ -1,4 +1,4 @@
-version: '2'
+version: '3.2'
 
 services:
   budget-web:
@@ -15,6 +15,7 @@ services:
       - mongodb
     environment:
       MONGO_HOST: mongodb
+      SECRET: fe1a1915a379f3be5394b64d14794932
     ports:
       - "1000:1000"
   mongodb:
@@ -24,5 +25,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ''
     ports:
       - 27017:27017
+    volumes:
+      - type: "bind"
+        source: "mongodb_data_volume"
+        target: "/data/db"
 networks:
   default:
+
+volumes:
+  mongodb_data_volume:
+    external: true

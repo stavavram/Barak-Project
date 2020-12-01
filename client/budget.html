@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-style.css">
     <link rel="stylesheet" href="assets/css/datepicker.min.css">
+    <link rel="stylesheet" href="assets/css/datatable.min.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
   </head>
@@ -51,6 +52,7 @@
 
             <section class="forms">
               <div>
+                <!--
                 <div class="input-group date" data-provide="datepicker">
                   <span>Start Date</span>
                   <input type="text" >
@@ -64,10 +66,9 @@
                   <div class="input-group-addon">
                     <span class="glyphicon glyphicon-th"></span>
                   </div>
-                </div>
-                <span>Collection</span>
-                <input id="collectionId" type="text" >
-                <button onclick="getProjects()">Display Projects</button>
+                </div>-->
+                <button onclick="displayProjectsInGraph()">Display Projects In Graph</button>
+                <button onclick="displayProjectsInTable()">Display Projects In Table</button>
               </div>
             </section>
 
@@ -76,11 +77,17 @@
 
               <div class="container-fluid">
                 <div class="row">
+
+                  <div class="col-md-12" style="overflow-y: scroll;" >
+                    <table id="projectsTable"></table>
+                  </div>
+
                   <div class="col-md-12">
                     <form id="contact" action="" method="post">
                       <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     </form>
                   </div>
+
                 </div>
               </div>
             </section>
@@ -95,7 +102,7 @@
             <nav id="menu">
               <ul>
                 <li><a href="index.html">Homepage</a></li>
-                <li><a href="budget.html">Shortcodes</a></li>
+                <li><a href="budget.html">Budget</a></li>
                 <!--<li>
                   <span class="opener">Dropdown One</span>
                   <ul>
@@ -131,5 +138,6 @@
     <script src="scripts/bubbleChart.js"></script>
     <script src="scripts/canvasjs.min.js"></script>
     <script src="scripts/datepicker.min.js"></script>
+    <script src="scripts/datatable.min.js"></script>
 </body>
 </html>
